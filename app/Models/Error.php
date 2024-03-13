@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -13,14 +15,22 @@ class Error extends Model
     use HasFactory;
     use HasUlids;
 
+    protected $perPage = 10;
+
     protected $fillable = [
         'name',
         'project_name',
         'project_url',
         'stack_trace',
+        'category_id'
     ];
 
+
     // Relationships
+
+    /**
+     * @return BelongsTo<Category>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
