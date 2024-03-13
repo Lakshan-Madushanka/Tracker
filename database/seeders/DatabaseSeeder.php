@@ -8,7 +8,6 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Error;
 use App\Models\Solution;
-use Database\Factories\ErrorFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,10 +20,12 @@ class DatabaseSeeder extends Seeder
         Category::factory()
             ->has(
                 Error::factory()
-                    ->has(Solution::factory()
-                        ->count(5)
+                    ->has(
+                        Solution::factory()
+                            ->count(5)
                     )
-                    ->count(20))
+                    ->count(20)
+            )
             ->count(5)
             ->create();
     }
