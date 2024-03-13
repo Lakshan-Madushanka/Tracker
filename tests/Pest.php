@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -17,5 +19,3 @@ uses(
     Tests\TestCase::class,
     LazilyRefreshDatabase::class,
 )->in('Feature', 'Unit');
-
-

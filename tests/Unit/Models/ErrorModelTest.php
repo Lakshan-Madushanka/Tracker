@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Category;
 use App\Models\Error;
 use App\Models\Solution;
 use Illuminate\Database\Eloquent\Collection;
 
-it('has columns', function ($name) {
+it('has columns', function ($name): void {
     $error = Error::factory()->create();
 
     expect($error)
@@ -18,7 +20,7 @@ it('has columns', function ($name) {
     'stack_trace',
 ]);
 
-it('has fillable columns', function ($name) {
+it('has fillable columns', function ($name): void {
     $columns = (new Error())->getFillable();
     expect(in_array($name, $columns))->toBeTrue();
 })->with([
@@ -28,7 +30,7 @@ it('has fillable columns', function ($name) {
     'stack_trace',
 ]);
 
-it('has has belongs to relationship for category', function () {
+it('has has belongs to relationship for category', function (): void {
     $error = Error::factory()
         ->for(Category::factory())
         ->create();
@@ -39,7 +41,7 @@ it('has has belongs to relationship for category', function () {
         ->toBeInstanceOf(Category::class);
 });
 
-it('has many relationship to solution', function () {
+it('has many relationship to solution', function (): void {
     $error = Error::factory()
         ->has(Solution::factory()->count(5))
         ->create();
