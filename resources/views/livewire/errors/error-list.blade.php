@@ -1,0 +1,213 @@
+@php use Illuminate\Support\Str; @endphp
+
+<div
+    x-on:error-created.window = "$wire.$refresh"
+    x-on:error-edited.window = "$wire.$refresh"
+    x-on:error-deleted.window = "$wire.$refresh"
+>
+
+    <livewire:errors.create-error wire:key="create-error-modal" :$categories/>
+    <livewire:errors.delete-error wire:key="delete-error-modal"/>
+    <livewire:errors.solutions.delete-all-solutions
+        wire:key="delete-all-solution-modal"
+        @all-solutions-deleted.window="$refresh"
+    />
+
+    <livewire:solutions.delete-solution wire:key="delete-solution-modal" @solution-deleted.window="$refresh"/>
+
+    <div class="flex mt-4 w-full gap-x-8">
+        <x-inputs.search class="w-[80%]" inputAttr="wire:model.live=search"/>
+        <select wire:model.live="category" class="select select-bordered grow max-w-xs">
+            <option value="" selected>All</option>
+            @foreach($categories as $category)
+                <option value="{{$category->name}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="flex justify-center h-8 mt-4">
+        <span class="loading loading-bars loading-lg" wire:loading/>
+    </div>
+
+    <ul class="list-none mt-0 pl-0">
+        @forelse($errors as $error)
+            <livewire:errors.edit-error wire:key="edit-error-{{$error->getKey()}}" :$categories :$error/>
+            <li wire:key="{{$error->getKey()}}"
+                class="shadow-lg bg-white rounded py-4 mb-6 [&>div]:flex [&>div]:max-w-lg [&>div]:px-8 [&>div]:justify-between [&>div>span]:w-1/2">
+                <div class="flex !justify-between items-center !max-w-full !w-full">
+                    <h2 class="p-2 mt-0">{{$error->name}}</h2>
+                    <div class="mt-0">
+                        <span
+                            @click="$dispatch('edit-error', {id: '{{$error->id}}'})"
+                            class="link link-primary"
+                        >
+                            Edit
+                        </span>
+                        <span class="h-full border border-amber-950 mx-2"></span>
+                        <span
+                            @click="$dispatch('delete-error', {errorId: '{{$error->id}}'})"
+                            class="link link-primary"
+                        >
+                            Delete
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <span>Category</span>
+                    <div class="w-1/2">
+                        <span class="badge badge-primary !w-auto">{{$error->category->name}}</span>
+                    </div>
+                </div>
+                <div>
+                    <span>Project Name</span>
+                    <span>{{Str::overwriteEmpty($error->project_name)}}</span>
+                </div>
+                <div>
+                    <span>Project URL</span>
+                    <span>
+                        <a href="{{$error->project_url}}" target="_blank"
+                           class="inline-block w-full link-primary text-ellipsis overflow-hidden whitespace-nowrap hover:cursor-pointer">
+                            {{Str::overwriteEmpty($error->project_url)}}
+                        </a>
+                    </span>
+                </div>
+                <div>
+                    <span>Created at</span>
+                    <span
+                        class="text-ellipsis overflow-hidden text-nowrap">{{$error->created_at->diffForHumans()}}</span>
+                </div>
+                <div class="mb-2">
+                    <span>Updated at</span>
+                    <span
+                        class="text-ellipsis overflow-hidden text-nowrap">{{$error->updated_at->diffForHumans()}}</span>
+                </div>
+                <div x-data="{showStackTrace: false}" class="w-full mb-4 !max-w-full">
+                    <div
+                        class="collapse collapse-plus bg-base-200"
+                        :class="showStackTrace ? 'collapse-open' : 'collapse-close'"
+                    >
+                        <div
+                            @click="showStackTrace = !showStackTrace"
+                            class="collapse-title text-lg font-medium cursor-pointer"
+                        >
+                            <span x-text="showStackTrace ? 'Hide stack trace' : 'Show stack trace'"></span>
+                        </div>
+                        <div class="collapse-content">
+                            @if($error->stack_trace)
+                                <pre><code class="language-php">{{$error->stack_trace}}</code></pre>
+                            @else
+                                <p>No stack trace found for this error</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div x-data="{showSolutions: false}" class="w-full !max-w-full">
+                    <div
+                        class="collapse collapse-plus bg-base-200"
+                        :class="showSolutions ? 'collapse-open' : 'collapse-close'"
+                    >
+                        <div
+                            @click="showSolutions = !showSolutions"
+                            class="collapse-title text-lg font-medium cursor-pointer"
+                        >
+                            <span x-text="showSolutions ? 'Hide solutions' : 'Show solutions'"></span>
+                        </div>
+                        <div class="collapse-content">
+                            @if($error->solutions)
+                                <ol
+                                    x-data="{show:true}"
+                                    x-show="show"
+                                    @remove-solution-list.window="if($event.detail.errorId === '{{$error->getKey()}}') {show=false}"
+                                    class="list-none space-y-4"
+                                    x-transition
+                                >
+                                    @foreach($error->solutions as $solution)
+                                        <li
+                                            wire:key="{{$solution->getKey()}}"
+                                            x-data="{showEditForm: false}"
+                                            @solution-updated.window="showEditForm=false"
+                                            class="bg-white"
+                                        >
+                                            <div x-show="!showEditForm" x-tansition class="flex">
+                                                <div
+                                                    class="flex flex-col w-[10%] border-r px-2 mr-4 justify-center items-center">
+                                                    <span class="badge badge-info">{{$solution->rank}}</span>
+                                                    <span>Rank</span>
+                                                </div>
+                                                <p class="w-[90%]">{{$solution->text}}</p>
+                                            </div>
+                                            <div x-show="showEditForm" x-transition class="p-4">
+                                                <livewire:errors.solutions.edit-solution
+                                                    wire:key="edit-solution-{{$solution->getKey()}}"
+                                                    :$error
+                                                    :$solution
+                                                    @solution-updated="$refresh"
+                                                />
+                                            </div>
+                                            <div class="flex justify-between items-center p-4 text-sm">
+                                                <div>
+                                                    <span
+                                                        @click="showEditForm=!showEditForm"
+                                                        x-text="showEditForm ? 'Show' : 'Edit'"
+                                                        class="link link-primary px-4 border-r-2 border-amber-950"
+                                                    >
+                                                    </span>
+                                                    <span
+                                                        @click="$dispatch('delete-solution', { solutionId: '{{$solution->getKey()}}' })"
+                                                        class="link link-primary px-4"
+                                                    >
+                                                        Delete
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>Updated: &nbsp;</span><span>{{$solution->updated_at->diffForHumans()}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                                <div class="flex">
+                                    <div class="w-[10%]"></div>
+                                    <div x-data="{showCreateSolution: false}"
+                                         @solution-created="showCreateSolution = false" class="flex-grow px-8 py-2">
+                                        <div x-show="showCreateSolution" x-trap="showCreateSolution" x-transition class="mb-2">
+                                            <livewire:errors.solutions.create-solution
+                                                wire:key="create-solution-{{$error->getKey()}}"
+                                                :error="$error"
+                                                @solution-created="$refresh"
+                                            />
+                                        </div>
+                                        <div>
+                                            <span
+                                                @click="showCreateSolution = !showCreateSolution"
+                                                x-text="showCreateSolution ? 'Hide' : 'Create'"
+                                                class="link link-primary"
+                                            >
+                                           </span>
+
+                                            @if($error->solutions->isNotEmpty())
+                                                <span class="h-full mx-4 border border-amber-950"></span>
+                                                <span
+                                                    @click="$dispatch('delete-all-solutions', { errorId: '{{$error->getKey()}}' })"
+                                                    class="link link-primary"
+                                                >
+                                                    Delete All
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <p>No solutions found for this error</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </li>
+        @empty
+            <h1 wire:loading.remove class="text-center text-red-500">No Errors Found !</h1>
+        @endforelse
+    </ul>
+
+    {{$errors->links()}}
+</div>
