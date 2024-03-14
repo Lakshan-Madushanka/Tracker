@@ -37,7 +37,8 @@
                     >
                     </textarea>
                     @error('form.name')
-                    <div class="text-red-500">{{$message}}</div>@enderror
+                    <div class="text-red-500">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="flex flex-col">
                     <label for="error_project_name">Project Name</label>
@@ -48,7 +49,8 @@
                         placeholder="project name"
                     />
                     @error('form.project_name')
-                    <div class="text-red-500">{{$message}}</div>@enderror
+                    <div class="text-red-500">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="flex flex-col">
                     <label for="error_project_url">Project URL</label>

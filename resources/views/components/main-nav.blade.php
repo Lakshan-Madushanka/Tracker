@@ -20,5 +20,16 @@
                 Create Error
             </span>
         </li>
+        <li x-data>
+            <a
+                @class([
+                    "link link-secondary",
+                    "font-bold" => request()->routeIs('categories'),
+                ])
+                href="{{route('categories')}}"
+            >
+                Categories
+            </a>
+        </li>
     </ul>
 </nav>
