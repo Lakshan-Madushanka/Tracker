@@ -19,14 +19,14 @@
             </thead>
             <tbody>
             @forelse($categories as $category)
-                <tr>
+                <tr wire:key="{{$category->getKey()}}">
                     <th>{{$loop->iteration}}</th>
                     <td>{{$category->name}}</td>
                     <td>{{$category->created_at->diffForHumans()}}</td>
                     <td>{{$category->updated_at->diffForHumans()}}</td>
                     <td>
                         <span @click="$dispatch('edit-category', {type: 'edit', id: '{{$category->id}}'})" class="link link-primary">Edit</span>
-                        <livewire:categories.edit-category wire:key="edit-category{{$category->getKey()}}" :$category @category-updated="$refresh"/>
+                        <livewire:categories.edit-category  wire:key="edit-category-{{$category->getKey()}}" :$category @category-updated="$refresh"/>
                     </td>
                     <td>
                         <span @click="$dispatch('delete-category', {type: 'edit', id: '{{$category->id}}'})" class="link link-primary">Delete</span>

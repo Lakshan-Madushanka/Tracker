@@ -6,18 +6,15 @@
     x-on:error-deleted.window = "$wire.$refresh"
 >
 
-    <livewire:errors.create-error wire:key="create-error-modal" :$categories/>
-    <livewire:errors.delete-error wire:key="delete-error-modal"/>
-    <livewire:errors.solutions.delete-all-solutions
-        wire:key="delete-all-solution-modal"
-        @all-solutions-deleted.window="$refresh"
-    />
+    <livewire:errors.create-error  :$categories/>
+    <livewire:errors.delete-error />
+    <livewire:errors.solutions.delete-all-solutions @all-solutions-deleted.window="$refresh"/>
 
-    <livewire:solutions.delete-solution wire:key="delete-solution-modal" @solution-deleted.window="$refresh"/>
+    <livewire:solutions.delete-solution  @solution-deleted.window="$refresh"/>
 
-    <div class="flex mt-4 w-full gap-x-8">
-        <x-inputs.search class="w-[80%]" inputAttr="wire:model.live=search"/>
-        <select wire:model.live="category" class="select select-bordered grow max-w-xs">
+    <div class="flex flex-col sm:flex-row mt-4 w-full gap-y-2 gap-x-8">
+        <x-inputs.search class="sm:w-[80%]" inputAttr="wire:model.live=search"/>
+        <select wire:model.live="category" class="select select-bordered grow sm:max-w-xs">
             <option value="" selected>All</option>
             @foreach($categories as $category)
                 <option value="{{$category->name}}">{{$category->name}}</option>
@@ -32,11 +29,11 @@
     <ul class="list-none mt-0 pl-0">
         @forelse($errors as $error)
             <livewire:errors.edit-error wire:key="edit-error-{{$error->getKey()}}" :$categories :$error/>
-            <li wire:key="{{$error->getKey()}}"
+            <li
                 class="shadow-lg bg-white rounded py-4 mb-6 [&>div]:flex [&>div]:max-w-lg [&>div]:px-8 [&>div]:justify-between [&>div>span]:w-1/2">
-                <div class="flex !justify-between items-center !max-w-full !w-full">
-                    <h2 class="p-2 mt-0">{{$error->name}}</h2>
-                    <div class="mt-0">
+                <div class="flex flex-col sm:flex-row sm:!justify-between items-center !max-w-full !w-full">
+                    <h2 class="p-0 sm:p-2 mt-0">{{$error->name}}</h2>
+                    <div class="mb-4 sm:mb-0 mt-0">
                         <span
                             @click="$dispatch('edit-error', {id: '{{$error->id}}'})"
                             class="link link-primary"
@@ -118,23 +115,23 @@
                                     x-data="{show:true}"
                                     x-show="show"
                                     @remove-solution-list.window="if($event.detail.errorId === '{{$error->getKey()}}') {show=false}"
-                                    class="list-none space-y-4"
+                                    class="list-none space-y-4 pl-0"
                                     x-transition
                                 >
                                     @foreach($error->solutions as $solution)
                                         <li
-                                            wire:key="{{$solution->getKey()}}"
                                             x-data="{showEditForm: false}"
                                             @solution-updated.window="showEditForm=false"
+                                            wire:key="{{$solution->getKey()}}"
                                             class="bg-white"
                                         >
-                                            <div x-show="!showEditForm" x-tansition class="flex">
+                                            <div x-show="!showEditForm" x-tansition class="flex flex-col sm:flex-row">
                                                 <div
-                                                    class="flex flex-col w-[10%] border-r px-2 mr-4 justify-center items-center">
+                                                    class="flex flex-col pt-2 sm:pt-0 sm:w-[10%] border-r px-2 mr-4 justify-center items-center">
                                                     <span class="badge badge-info">{{$solution->rank}}</span>
                                                     <span>Rank</span>
                                                 </div>
-                                                <p class="w-[90%]">{{$solution->text}}</p>
+                                                <p class="sm:w-[90%]">{{$solution->text}}</p>
                                             </div>
                                             <div x-show="showEditForm" x-transition class="p-4">
                                                 <livewire:errors.solutions.edit-solution
@@ -144,7 +141,7 @@
                                                     @solution-updated="$refresh"
                                                 />
                                             </div>
-                                            <div class="flex justify-between items-center p-4 text-sm">
+                                            <div class="flex flex-col sm:justify-between items-center p-4 text-sm">
                                                 <div>
                                                     <span
                                                         @click="showEditForm=!showEditForm"
@@ -159,7 +156,7 @@
                                                         Delete
                                                     </span>
                                                 </div>
-                                                <div>
+                                                <div class="mt-2 sm:mt-0">
                                                     <span>Updated: &nbsp;</span><span>{{$solution->updated_at->diffForHumans()}}</span>
                                                 </div>
                                             </div>
