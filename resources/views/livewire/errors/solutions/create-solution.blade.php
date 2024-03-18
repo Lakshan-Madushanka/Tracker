@@ -1,7 +1,22 @@
-<form class="flex flex-col space-y-2">
-    <textarea wire:model="form.text" placeholder="Solution" class="textarea textarea-bordered textarea-lg w-full min-h-64" autofocus></textarea>
+@php use Illuminate\Support\Str; @endphp
+
+@php
+$id = Str::random();
+@endphp
+
+<form  class="flex flex-col space-y-2">
+    <div class="bg-white">
+        <input x-ref="trixEditor" id="{{$id}}" type="hidden" name="content" value="{{$form->text}}">
+        <trix-editor
+            @trix-change.self="$wire.form.text = $refs.trixEditor.getAttribute('value')"
+            input="{{$id}}"
+            placeholder="Solution"
+        >
+        </trix-editor>
+    </div>
     <div class="text-red-500">@error('form.text') {{$message}} @enderror</div>
-    <input wire:model="form.rank" type="number" min="1"  placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+
+    <input wire:model="form.rank" type="number" min="1"  placeholder="Rank" class="input input-bordered w-full max-w-xs" />
     <div class="text-red-500">@error('form.rank') {{$message}} @enderror</div>
 
     <button wire:dirty.remove type="button" class="btn btn-active btn-xs btn-disabled self-start">Create</button>

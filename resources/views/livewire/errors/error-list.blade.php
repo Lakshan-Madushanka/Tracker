@@ -1,16 +1,16 @@
 @php use Illuminate\Support\Str; @endphp
 
 <div
-    x-on:error-created.window = "$wire.$refresh"
-    x-on:error-edited.window = "$wire.$refresh"
-    x-on:error-deleted.window = "$wire.$refresh"
+    x-on:error-created.window="$wire.$refresh"
+    x-on:error-edited.window="$wire.$refresh"
+    x-on:error-deleted.window="$wire.$refresh"
 >
 
-    <livewire:errors.create-error  :$categories/>
-    <livewire:errors.delete-error />
+    <livewire:errors.create-error :$categories/>
+    <livewire:errors.delete-error/>
     <livewire:errors.solutions.delete-all-solutions @all-solutions-deleted.window="$refresh"/>
 
-    <livewire:solutions.delete-solution  @solution-deleted.window="$refresh"/>
+    <livewire:solutions.delete-solution @solution-deleted.window="$refresh"/>
 
     <div class="flex flex-col sm:flex-row mt-4 w-full gap-y-2 gap-x-8">
         <x-inputs.search class="sm:w-[80%]" inputAttr="wire:model.live=search"/>
@@ -31,28 +31,32 @@
             <livewire:errors.edit-error wire:key="edit-error-{{$error->getKey()}}" :$categories :$error/>
             <li
                 class="shadow-lg bg-white rounded py-4 mb-6 [&>div]:flex [&>div]:max-w-lg [&>div]:px-8 [&>div]:justify-between [&>div>span]:w-1/2">
-                <div class="flex flex-col sm:flex-row sm:!justify-between items-center !max-w-full !w-full">
-                    <h2 class="p-0 sm:p-2 mt-0">{{$error->name}}</h2>
-                    <div class="mb-4 sm:mb-0 mt-0">
-                        <span
-                            @click="$dispatch('edit-error', {id: '{{$error->id}}'})"
-                            class="link link-primary"
-                        >
-                            Edit
-                        </span>
-                        <span class="h-full border border-amber-950 mx-2"></span>
-                        <span
-                            @click="$dispatch('delete-error', {errorId: '{{$error->id}}'})"
-                            class="link link-primary"
-                        >
-                            Delete
-                        </span>
+                <div class="flex flex-col !py-0 !px-4 md:flex-row md:!justify-between items-center !max-w-full !w-full">
+                    <h2 class="w-full md:w-[85%] !p-1 mt-0 break-words">
+                        <span>{{$error->name}}</span>
+                    </h2>
+                    <div class="md:w-[15%] mb-4 sm:mb-0 mt-0 flex justify-end">
+                        <div>
+                            <span
+                                @click="$dispatch('edit-error', {id: '{{$error->id}}'})"
+                                class="link link-primary"
+                            >
+                                 Edit
+                            </span>
+                            <span class="h-full border border-amber-950 mx-2"></span>
+                            <span
+                                @click="$dispatch('delete-error', {errorId: '{{$error->id}}'})"
+                                class="link link-primary"
+                            >
+                                Delete
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <span>Category</span>
                     <div class="w-1/2">
-                        <span class="badge badge-primary !w-auto">{{$error->category->name}}</span>
+                        <span class="badge badge-accent !w-auto">{{$error->category->name}}</span>
                     </div>
                 </div>
                 <div>
@@ -63,7 +67,7 @@
                     <span>Project URL</span>
                     <span>
                         <a href="{{$error->project_url}}" target="_blank"
-                           class="inline-block w-full link-primary text-ellipsis overflow-hidden whitespace-nowrap hover:cursor-pointer">
+                           class="inline-block w-full link-accent text-ellipsis overflow-hidden whitespace-nowrap hover:cursor-pointer">
                             {{Str::overwriteEmpty($error->project_url)}}
                         </a>
                     </span>
@@ -91,7 +95,7 @@
                         </div>
                         <div class="collapse-content">
                             @if($error->stack_trace)
-                                <pre><code class="language-php">{{$error->stack_trace}}</code></pre>
+                                <div class="code no-prose p-4">{!! $error->stack_trace !!}</div>
                             @else
                                 <p>No stack trace found for this error</p>
                             @endif
@@ -127,11 +131,13 @@
                                         >
                                             <div x-show="!showEditForm" x-tansition class="flex flex-col sm:flex-row">
                                                 <div
-                                                    class="flex flex-col pt-2 sm:pt-0 sm:w-[10%] border-r px-2 mr-4 justify-center items-center">
+                                                    class="flex flex-col pt-2 sm:pt-0 sm:w-[10%] border-r px-2 justify-center items-center">
                                                     <span class="badge badge-info">{{$solution->rank}}</span>
                                                     <span>Rank</span>
                                                 </div>
-                                                <p class="sm:w-[90%]">{{$solution->text}}</p>
+                                                <div class="sm:w-[90%]">
+                                                    <div class="code px-2">{!! $solution->text !!}</div>
+                                                </div>
                                             </div>
                                             <div x-show="showEditForm" x-transition class="p-4">
                                                 <livewire:errors.solutions.edit-solution
@@ -141,7 +147,8 @@
                                                     @solution-updated="$refresh"
                                                 />
                                             </div>
-                                            <div class="flex flex-col sm:justify-between items-center p-4 text-sm">
+                                            <div
+                                                class="flex sm:flex-row flex-col sm:justify-between items-center p-4 text-sm">
                                                 <div>
                                                     <span
                                                         @click="showEditForm=!showEditForm"
@@ -167,7 +174,8 @@
                                     <div class="w-[10%]"></div>
                                     <div x-data="{showCreateSolution: false}"
                                          @solution-created="showCreateSolution = false" class="flex-grow px-8 py-2">
-                                        <div x-show="showCreateSolution" x-trap="showCreateSolution" x-transition class="mb-2">
+                                        <div x-show="showCreateSolution" x-trap="showCreateSolution" x-transition
+                                             class="mb-2">
                                             <livewire:errors.solutions.create-solution
                                                 wire:key="create-solution-{{$error->getKey()}}"
                                                 :error="$error"

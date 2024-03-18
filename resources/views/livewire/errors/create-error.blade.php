@@ -28,12 +28,11 @@
                     <div class="text-red-500">{{$message}}</div>@enderror
                 </div>
                 <div class="flex flex-col">
-                    <label for="error_name">Content</label>
+                    <label for="error_name">Name</label>
                     <textarea
                         wire:model="form.name"
                         id="error_name"
                         class="textarea textarea-bordered"
-                        placeholder="error"
                     >
                     </textarea>
                     @error('form.name')
@@ -46,7 +45,6 @@
                         wire:model="form.project_name"
                         id="error_project_name"
                         class="input input-bordered"
-                        placeholder="project name"
                     />
                     @error('form.project_name')
                     <div class="text-red-500">{{$message}}</div>
@@ -59,7 +57,6 @@
                         id="error_project_url"
                         class="input input-bordered"
                         type="url"
-                        placeholder="project url"
                     />
                     @error('form.project_url')
                     <div class="text-red-500">{{$message}}</div>@enderror
@@ -69,8 +66,7 @@
                     <textarea
                         wire:model="form.stack_trace"
                         id="error_stacktrace"
-                        class="textarea textarea-bordered"
-                        placeholder="stack trace"
+                        class="textarea textarea-bordered min-h-64"
                     >
                     </textarea>
                     @error('form.stack_trace')
@@ -84,7 +80,7 @@
                     wire:click="save"
                     class="btn btn-info flex justify-center items-center text-center gap-2"
                 >
-                    <span>Confirm</span>
+                    <span>Save</span>
                     <span wire:loading class="loading loading-bars loading-xs"></span>
                 </button>
             </div>

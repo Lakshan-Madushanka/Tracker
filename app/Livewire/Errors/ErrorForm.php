@@ -23,7 +23,7 @@ class ErrorForm extends Form
     public string $category_id = '';
 
     #[Validate(['string', 'required', 'min:3'])]
-    public string $name;
+    public string $name = '';
 
     #[Validate(['string', 'nullable'])]
     public ?string $project_name;
@@ -32,7 +32,7 @@ class ErrorForm extends Form
     public ?string $project_url;
 
     #[Validate(['string', 'min:3', 'nullable'])]
-    public ?string $stack_trace;
+    public ?string $stack_trace = '';
 
     public function setCategories(Collection $categories): void
     {
