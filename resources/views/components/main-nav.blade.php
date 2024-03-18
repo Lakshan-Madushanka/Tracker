@@ -20,7 +20,7 @@
                 Create Error
             </span>
         </li>
-        <li x-data>
+        <li>
             <a
                 @class([
                     "link link-secondary",
@@ -31,12 +31,29 @@
                 Categories
             </a>
         </li>
+        <li>
+            <a
+                @class([
+                    "link link-secondary",
+                    "font-bold" => request()->routeIs('links'),
+                ])
+                href="{{route('links')}}"
+            >
+                Links
+            </a>
+        </li>
     </ul>
 
-    <ul class="flex justify-between px-2 text-white sm:hidden">
-        <li x-data="{show:false}">
-            <span @click="show=!show">list</span>
-            <div x-show="show" x-transition class="flex flex-col gap-y-1">
+    <ul x-data="{show:false}" x-cloak class="flex justify-between items-center px-2 text-white md:hidden">
+        <li>
+            <div x-show="!show" x-transition>
+                <x-lucide-align-justify  @click="show=!show" class="h-4 w-4"/>
+            </div>
+            <div x-show="show" x-transition>
+                <x-lucide-align-justify x-show="show" @click="show=!show" class="h-4 w-4 rotate-90"/>
+            </div>
+
+            <div x-show="show" x-transition class="flex flex-col gap-y-1 mt-2">
                 <a
                     @class([
                         "link link-secondary",
@@ -51,9 +68,27 @@
                     @click="$dispatch('create-error')"
                 >
                 Create Error
-            </span>
+                </span>
+                <a
+                    @class([
+                        "link link-secondary",
+                        "font-bold" => request()->routeIs('categories'),
+                    ])
+                    href="{{route('categories')}}"
+                >
+                    Categories
+                </a>
+                <a
+                    @class([
+                        "link link-secondary",
+                        "font-bold" => request()->routeIs('links'),
+                    ])
+                    href="{{route('links')}}"
+                >
+                    Links
+                </a>
             </div>
         </li>
-        <li class="justify-self-start text-white">Tracker</li>
+        <li><a href="{{route('home')}}" class="justify-self-start text-white cursor-pointer">Tracker</a></li>
     </ul>
 </nav>
