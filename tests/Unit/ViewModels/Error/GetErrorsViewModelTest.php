@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\DataObjects\Errors\Filters;
+use App\DataObjects\Errors\ErrorFilter;
 use App\Models\Category;
 use App\Models\Error as Error;
 use App\Models\Solution;
@@ -76,7 +76,7 @@ it('can filter errors by name', function (): void {
         ))
         ->create();
 
-    $vm = new GetErrorsViewModel(new Filters(name: '1'));
+    $vm = new GetErrorsViewModel(new ErrorFilter(name: '1'));
 
     $errors = $vm->errors();
 
@@ -97,7 +97,7 @@ it('can filter errors by project_name', function (): void {
         ))
         ->create();
 
-    $vm = new GetErrorsViewModel(new Filters(name: '1'));
+    $vm = new GetErrorsViewModel(new ErrorFilter(name: '1'));
 
     $errors = $vm->errors();
 
@@ -120,7 +120,7 @@ it('can filter errors by category name', function (): void {
     $category2->errors()->save($error2);
 
 
-    $vm = new GetErrorsViewModel(new Filters(category: 'category1'));
+    $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1'));
 
     $errors = $vm->errors();
 
@@ -145,7 +145,7 @@ it('can filter errors by category name and error name', function (): void {
     $category2->errors()->save($error2);
 
 
-    $vm = new GetErrorsViewModel(new Filters(category: 'category1', name: '1'));
+    $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1', name: '1'));
 
     $errors = $vm->errors();
 
@@ -169,7 +169,7 @@ it('can filter errors by category name and project name', function (): void {
     $category2->errors()->save($error2);
 
 
-    $vm = new GetErrorsViewModel(new Filters(category: 'category1', name: '1'));
+    $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1', name: '1'));
 
     $errors = $vm->errors();
 

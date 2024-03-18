@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ViewModels\Error;
 
-use App\DataObjects\Errors\Filters;
+use App\DataObjects\Errors\ErrorFilter;
 use App\Models\Category;
 use App\Models\Error;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -16,7 +16,7 @@ use Spatie\ViewModels\ViewModel;
 
 class GetErrorsViewModel extends ViewModel
 {
-    public function __construct(private readonly Filters $filters = new Filters()) {}
+    public function __construct(private readonly ErrorFilter $filter = new ErrorFilter()) {}
 
     /**
      * @return LengthAwarePaginator<Model>
@@ -31,18 +31,18 @@ class GetErrorsViewModel extends ViewModel
                     ->orderByDesc('updated_at')
             ])
             ->when(
-                $this->filters->name,
+                $this->filter->name,
                 fn(Builder $query) => $query
                     ->where(
                         fn(Builder $query) => $query
-                            ->where('name', 'like', "%{$this->filters->name}%")
-                            ->orWhere('project_name', 'like', "%{$this->filters->name}%")
+                            ->where('name', 'like', "%{$this->filter->name}%")
+                            ->orWhere('project_name', 'like', "%{$this->filter->name}%")
                     )
             )
             ->when(
-                $this->filters->category,
+                $this->filter->category,
                 fn(Builder $query) => $query
-                    ->whereHas('category', fn(Builder $query) => $query->where('name', $this->filters->category))
+                    ->whereHas('category', fn(Builder $query) => $query->where('name', $this->filter->category))
             )
             ->latest()
             ->paginate();

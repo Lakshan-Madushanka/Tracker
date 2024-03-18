@@ -6,7 +6,7 @@ namespace App\DataObjects\Errors;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class Filters implements Arrayable
+class ErrorFilter implements Arrayable
 {
     public function __construct(
         public readonly string $name = '',
