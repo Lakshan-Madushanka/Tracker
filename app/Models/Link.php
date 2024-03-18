@@ -7,30 +7,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property string $name
- * @method \string getKey()
- */
-class Category extends Model
+class Link extends Model
 {
     use HasFactory;
     use HasUlids;
 
     protected $fillable = [
-        'name',
+        'url',
+        'description',
+        'category_id'
     ];
 
     // Relationships
-    public function errors(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Error::class);
-    }
-
-    public function links(): HasMany
-    {
-        return $this->hasMany(Link::class);
+        return $this->belongsTo(Category::class);
     }
     // End of Relationships
 }

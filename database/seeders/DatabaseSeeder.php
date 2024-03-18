@@ -7,6 +7,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
 use App\Models\Error;
+use App\Models\Link;
 use App\Models\Solution;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,10 @@ class DatabaseSeeder extends Seeder
                             ->count(5)
                     )
                     ->count(20)
+            )
+            ->has(
+                Link::factory()
+                    ->count(8)
             )
             ->count(5)
             ->create();
