@@ -12,6 +12,9 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/github.css';
 window.hljs = hljs;
 
+import Trix from 'trix';
+import 'trix/dist/trix.css'
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
