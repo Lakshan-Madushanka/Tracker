@@ -30,6 +30,7 @@
         @forelse($errors as $error)
             <livewire:errors.edit-error wire:key="edit-error-{{$error->getKey()}}" :$categories :$error/>
             <li
+                wire:key="{{$error->getKey()}}"
                 class="shadow-lg bg-white rounded py-4 mb-6 [&>div]:flex [&>div]:max-w-lg [&>div]:px-8 [&>div]:justify-between [&>div>span]:w-1/2">
                 <div class="flex flex-col !py-0 !px-4 md:flex-row md:!justify-between items-center !max-w-full !w-full">
                     <h2 class="w-full md:w-[85%] !p-1 mt-0 break-words">
@@ -82,6 +83,26 @@
                     <span
                         class="text-ellipsis overflow-hidden text-nowrap">{{$error->updated_at->diffForHumans()}}</span>
                 </div>
+                <div x-data="{showDescription: false}" class="w-full mb-4 !max-w-full">
+                    <div
+                        class="collapse collapse-plus bg-base-200"
+                        :class="showDescription ? 'collapse-open' : 'collapse-close'"
+                    >
+                        <div
+                            @click="showDescription = !showDescription"
+                            class="collapse-title text-lg font-medium cursor-pointer"
+                        >
+                            <span x-text="showDescription ? 'Hide description' : 'Show description'"></span>
+                        </div>
+                        <div class="collapse-content">
+                            @if($error->description)
+                                <div class="code p-4">{!! $error->description !!}</div>
+                            @else
+                                <p class="text-warning">No description found for this error</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div x-data="{showStackTrace: false}" class="w-full mb-4 !max-w-full">
                     <div
                         class="collapse collapse-plus bg-base-200"
@@ -95,9 +116,9 @@
                         </div>
                         <div class="collapse-content">
                             @if($error->stack_trace)
-                                <div class="code no-prose p-4">{!! $error->stack_trace !!}</div>
+                                <div><p class="p-4 code">{!! $error->stack_trace !!}</p></div>
                             @else
-                                <p>No stack trace found for this error</p>
+                                <p class="text-warning">No stack trace found for this error</p>
                             @endif
                         </div>
                     </div>
@@ -203,14 +224,14 @@
                                     </div>
                                 </div>
                             @else
-                                <p>No solutions found for this error</p>
+                                <p class="text-warning">No solutions found for this error</p>
                             @endif
                         </div>
                     </div>
                 </div>
             </li>
         @empty
-            <h1 wire:loading.remove class="text-center text-red-500">No Errors Found !</h1>
+            <p wire:loading.remove class="text-2xl text-center text-error">No Errors Found !</p>
         @endforelse
     </ul>
 

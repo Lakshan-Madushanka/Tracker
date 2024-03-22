@@ -1,3 +1,8 @@
+@php
+    use Illuminate\Support\Str;
+    $id = Str::random();
+@endphp
+
 <div
     x-data="{show: false, solutionId: 0}"
     @create-error.window="if($wire.type === 'create'){show=true}"
@@ -38,6 +43,16 @@
                     @error('form.name')
                     <div class="text-red-500">{{$message}}</div>
                     @enderror
+                </div>
+                <div class="bg-white">
+                    <label for="error_name">Description</label>
+                    <input class="code" x-ref="trixEditor" id="{{$id}}" type="hidden" name="content" value="{{$form->description}}">
+                    <trix-editor
+                        @trix-change.self="$wire.form.description = $refs.trixEditor.getAttribute('value')"
+                        input="{{$id}}"
+                    >
+                    </trix-editor>
+                    <div class="text-red-500">@error('form.description') {{$message}} @enderror</div>
                 </div>
                 <div class="flex flex-col">
                     <label for="error_project_name">Project Name</label>

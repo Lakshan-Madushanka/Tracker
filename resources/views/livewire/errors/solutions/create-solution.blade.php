@@ -1,7 +1,6 @@
-@php use Illuminate\Support\Str; @endphp
-
 @php
-$id = Str::random();
+    use Illuminate\Support\Str;
+    $id = Str::random();
 @endphp
 
 <form  class="flex flex-col space-y-2">

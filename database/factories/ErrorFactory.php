@@ -32,6 +32,7 @@ class ErrorFactory extends Factory
         return [
             'category_id' => Category::factory(),
             'name' => $error['name'],
+            'description' => $this->faker->sentence(),
             'project_name' => $this->faker->words(random_int(2, 5), true),
             'project_url' => $this->faker->url(),
             'stack_trace' => $error['stack_trace'],
@@ -45,8 +46,6 @@ class ErrorFactory extends Factory
         if ($errorNo === 0) {
             $errorNo = 3;
         }
-
-        echo $errorNo;
 
         try {
             match($errorNo) {

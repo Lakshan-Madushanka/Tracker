@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->foreignIdFor(Category::class)->constrained();
 
             $table->string('name');
+            $table->text('description');
             $table->string('project_name')->nullable();
             $table->string('project_url')->nullable();
             $table->longText('stack_trace')->nullable();

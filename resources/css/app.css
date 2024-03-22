@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .text-warning {
+        @apply text-yellow-400 font-bold text-lg
+    }
+
+    .text-error {
+        @apply text-red-400 font-bold text-lg
+    }
+}

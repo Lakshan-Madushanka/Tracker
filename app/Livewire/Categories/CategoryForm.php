@@ -16,7 +16,7 @@ class CategoryForm extends Form
     public string $categoryId;
 
     #[Validate(['string', 'required', 'unique:categories'])]
-    public string $name;
+    public string $name = '';
 
     public function setCategory(Category $category): void
     {
@@ -31,6 +31,8 @@ class CategoryForm extends Form
         $this->validate();
 
         $createCategoryAction->execute($this->only('name'));
+
+        $this->reset('name');
 
     }
 

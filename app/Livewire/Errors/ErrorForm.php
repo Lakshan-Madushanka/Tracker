@@ -26,6 +26,9 @@ class ErrorForm extends Form
     public string $name = '';
 
     #[Validate(['string', 'nullable'])]
+    public string $description = '';
+
+    #[Validate(['string', 'nullable'])]
     public ?string $project_name;
 
     #[Validate(['url', 'nullable'])]
@@ -46,6 +49,7 @@ class ErrorForm extends Form
         $this->errorId = $error->getKey();
         $this->category_id = $error->category_id;
         $this->name = $error->name;
+        $this->description = $error->description;
         $this->project_name = $error->project_name;
         $this->project_url = $error->project_url;
         $this->stack_trace = $error->stack_trace;

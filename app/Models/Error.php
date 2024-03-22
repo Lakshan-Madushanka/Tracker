@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $id
  * @property string $name
+ * @property string $description
  * @property string $project_name
  * @property string $project_url
  * @property string $stack_trace
@@ -29,6 +30,7 @@ class Error extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'project_name',
         'project_url',
         'stack_trace',

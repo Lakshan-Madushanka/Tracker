@@ -8,13 +8,13 @@
     <dialog class="modal" :open="show">
         <div class="modal-box w-full md:max-w-screen-md">
             <h3 class="font-bold text-lg mt-0">
-                Create Error
+                Create Category
             </h3>
 
             <div class="flex flex-col gap-4 mb-8">
                 <div class="flex flex-col">
                     <label for="category_name" class="mb-1">Category</label>
-                    <input wire:model="form.name" id="category_name" class="input input-bordered">
+                    <input wire:keydown.enter="save" wire:model="form.name" id="category_name" class="input input-bordered">
                     @error('form.name')
                     <div class="text-red-500">{{$message}}</div>
                     @enderror
