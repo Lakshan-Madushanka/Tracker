@@ -33,7 +33,7 @@
                     </td>
                 </tr>
             @empty
-                <h2 class="text-yellow-400">No category found</h2>
+                <p class="pl-2 text-xl text-yellow-400">No category found</p>
             @endforelse
             </tbody>
         </table>
