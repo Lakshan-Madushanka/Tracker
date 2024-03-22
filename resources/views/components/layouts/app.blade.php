@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 </head>
 <body class="bg-gray-200">
 <header>
@@ -19,11 +16,32 @@
     {{ $slot }}
 </main>
 <script type="module">
-    document.addEventListener('DOMContentLoaded', (event) => {
-        document.querySelectorAll('.code').forEach((el) => {
+    const highlightSyntax = () => {
+        document.querySelectorAll('.code pre').forEach((el) => {
+            el.removeAttribute('data-highlighted')
             hljs.highlightElement(el);
         });
+    }
+
+    document.addEventListener('livewire:init', () => {
+        const events = [
+            'error-edited',
+            'error-created',
+            'solution-edited',
+            'solution-created',
+        ];
+
+        events.forEach((event) => {
+            Livewire.on(event, () => {
+                setTimeout(() => {highlightSyntax()}, 2000)
+            })
+        })
     });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        highlightSyntax()
+    });
+
 </script>
 </body>
 </html>
