@@ -14,7 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('solutions', function (Blueprint $table): void {
             $table->ulid('id')->primary();
-            $table->foreignIdFor(App\Models\Error::class)->constrained();
+            $table->foreignIdFor(App\Models\Error::class)->constrained()->cascadeOnDelete();
 
             $table->tinyInteger('rank');
             $table->text('text');
