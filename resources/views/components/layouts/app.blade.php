@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        trix-editor pre strong{
+            font-weight: bold;
+            color: white !important;
+        }
+    </style>
 </head>
 <body class="bg-gray-200">
 <header>
@@ -27,8 +34,11 @@
         const events = [
             'error-edited',
             'error-created',
-            'solution-edited',
+            'error-deleted',
+            'solution-updated',
             'solution-created',
+            'solution-deleted',
+
         ];
 
         events.forEach((event) => {

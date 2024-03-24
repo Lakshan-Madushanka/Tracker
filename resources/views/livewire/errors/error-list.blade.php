@@ -94,9 +94,9 @@
                         >
                             <span x-text="showDescription ? 'Hide description' : 'Show description'"></span>
                         </div>
-                        <div class="collapse-content">
+                        <div class="collapse-content max-h-screen overflow-auto">
                             @if($error->description)
-                                <div class="code p-4">{!! $error->description !!}</div>
+                                <div class="code">{!! $error->description !!}</div>
                             @else
                                 <p class="text-warning">No description found for this error</p>
                             @endif
@@ -114,9 +114,9 @@
                         >
                             <span x-text="showStackTrace ? 'Hide stack trace' : 'Show stack trace'"></span>
                         </div>
-                        <div class="collapse-content">
+                        <div class="collapse-content max-h-screen overflow-auto">
                             @if($error->stack_trace)
-                                <div><p class="p-4 code">{!! $error->stack_trace !!}</p></div>
+                                <div class="code"><pre class="code">{{ $error->stack_trace }}</pre></div>
                             @else
                                 <p class="text-warning">No stack trace found for this error</p>
                             @endif
@@ -134,7 +134,7 @@
                         >
                             <span x-text="showSolutions ? 'Hide solutions' : 'Show solutions'"></span>
                         </div>
-                        <div class="collapse-content">
+                        <div class="collapse-content max-h-screen overflow-auto">
                             @if($error->solutions)
                                 <ol
                                     x-data="{show:true}"
@@ -152,12 +152,13 @@
                                         >
                                             <div x-show="!showEditForm" x-tansition class="flex flex-col sm:flex-row">
                                                 <div
-                                                    class="flex flex-col pt-2 sm:pt-0 sm:w-[10%] border-r px-2 justify-center items-center">
+                                                    class="flex flex-col pt-2 sm:w-[10%] border-r px-2 justify-center items-center"
+                                                >
                                                     <span class="badge badge-info">{{$solution->rank}}</span>
                                                     <span>Rank</span>
                                                 </div>
                                                 <div class="sm:w-[90%]">
-                                                    <div class="code px-2">{!! $solution->text !!}</div>
+                                                    <div class="code p-2">{!! $solution->text !!}</div>
                                                 </div>
                                             </div>
                                             <div x-show="showEditForm" x-transition class="p-4">
