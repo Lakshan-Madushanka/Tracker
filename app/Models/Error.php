@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Stevebauman\Purify\Facades\Purify;
 
 /**
  * @property string $id
@@ -36,6 +38,15 @@ class Error extends Model
         'stack_trace',
         'category_id'
     ];
+
+    // Accessors
+
+    public function description(): Attribute
+    {
+        return Attribute::get(function ($value) {
+            return Purify::clean($value);
+        });
+    }
 
 
     // Relationships
