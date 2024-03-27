@@ -21,6 +21,7 @@ it('can create an error', function (): void {
     Livewire::test(CreateError::class, ['categories' => Category::all()])
         ->set('form.category_id', $error->category_id)
         ->set('form.name', $error->name)
+        ->set('form.description', $error->description)
         ->set('form.stack_trace', $error->stack_trace)
         ->set('form.project_name', $error->project_name)
         ->set('form.project_url', $error->project_url)
