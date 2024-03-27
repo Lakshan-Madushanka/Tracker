@@ -1,5 +1,7 @@
 @php use Illuminate\Support\Str; @endphp
 <div class="bg-white">
+    <x-slot:title>Links</x-slot:title>
+
     <livewire:links.create-link :$categories @link-created="$refresh"/>
     <livewire:links.delete-link @link-deleted="$refresh"/>
 

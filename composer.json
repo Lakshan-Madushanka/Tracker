@@ -14,7 +14,8 @@
         "mallardduck/blade-lucide-icons": "^1.11",
         "spatie/laravel-backup": "^8.6",
         "spatie/laravel-view-models": "^1.5",
-        "stevebauman/purify": "^6.2"
+        "stevebauman/purify": "^6.2",
+        "ext-zip": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -60,6 +61,9 @@
         ],
         "analyze": [
             "./vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "./vendor/bin/pest"
         ]
     },
     "extra": {

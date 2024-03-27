@@ -1,5 +1,7 @@
 @php use Illuminate\Support\Str; @endphp
 <div class="bg-white">
+    <x-slot:title>Categories</x-slot:title>
+
     <livewire:categories.create-category  @category-created="$refresh"/>
     <livewire:categories.delete-category  @category-deleted="$refresh"/>
     <header class="flex justify-between p-2">

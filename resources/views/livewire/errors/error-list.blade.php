@@ -6,6 +6,8 @@
     x-on:error-deleted.window="$wire.$refresh"
 >
 
+    <x-slot:title>Errors</x-slot:title>
+
     <livewire:errors.create-error :$categories/>
     <livewire:errors.delete-error/>
     <livewire:errors.solutions.delete-all-solutions @all-solutions-deleted.window="$refresh"/>
