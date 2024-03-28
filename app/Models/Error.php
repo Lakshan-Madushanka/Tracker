@@ -43,9 +43,7 @@ class Error extends Model
 
     public function description(): Attribute
     {
-        return Attribute::get(function ($value) {
-            return Purify::clean($value);
-        });
+        return Attribute::get(fn($value) => Purify::clean($value));
     }
 
 

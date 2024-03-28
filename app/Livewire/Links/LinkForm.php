@@ -8,7 +8,6 @@ use App\Actions\Link\CreateLinkAction;
 use App\Actions\Link\UpdateLinkAction;
 use App\Models\Link;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class LinkForm extends Form
