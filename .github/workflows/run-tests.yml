@@ -23,7 +23,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Install dependencies
-        if: steps.docker.outcome =='success'
+        #if: steps.docker.outcome =='success'
         run: composer install
 
       - name: Install npm dependencies
