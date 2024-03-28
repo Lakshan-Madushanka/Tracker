@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/abbasudo/laravel-purity/assets/47297673/20b5e0c5-3636-4c45-a5d5-c7dc8ff14c3f" width="400"  alt=""/>
+    <img src="https://github.com/abbasudo/laravel-purity/assets/47297673/20b5e0c5-3636-4c45-a5d5-c7dc8ff14c3f" width="800"/>
 </p>
 
 # Tracker
@@ -13,7 +13,7 @@ In addition to that this provides link management feature, so you never forget l
 > Here **error** means a general term. It can be anything you need to keep remember
 
 ## Resources
-- [How it works](https://youtu.be/HYm4acku6Ko)
+- [How it works (video)](https://youtu.be/nuircvl2z4g)
 
 ## Requirements
 - PHP >= 8.1
@@ -28,8 +28,8 @@ In addition to that this provides link management feature, so you never forget l
     - `npm run build or npm run dev`
 
 ### Docker
-`docker-compose up`
-url - (http://localhost:821/)[http://localhost:821/]
+- `docker-compose up`
+- URL - http://localhost:821/
 
 ### Sail
 Consult the [documentation](https://laravel.com/docs/11.x/sail)
