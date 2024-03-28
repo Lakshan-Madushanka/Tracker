@@ -68,10 +68,14 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+      - name: Install npm dependencies
+        run: npm install
+
       - name: Prepare the application
         run: |
           php -r "file_exists('.env') || copy('.env.ci', '.env.testing') && copy('.env.example', '.env');"
           php artisan key:generate
+          npm run build
 
       - name: Clear Config
         run: php artisan config:clear
