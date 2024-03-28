@@ -17,7 +17,7 @@ class Link extends Model
     protected $fillable = [
         'url',
         'description',
-        'category_id'
+        'category_id',
     ];
 
     // Relationships

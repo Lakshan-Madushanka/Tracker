@@ -29,17 +29,17 @@ class GetLinksViewModel extends ViewModel
             ->with('category')
             ->when(
                 $this->filter->search,
-                fn(Builder $query) => $query
+                fn (Builder $query) => $query
                     ->where(
-                        fn(Builder $query) => $query
+                        fn (Builder $query) => $query
                             ->where('url', 'like', "%{$this->filter->search}%")
                             ->orWhere('description', 'like', "%{$this->filter->search}%")
                     )
             )
             ->when(
                 $this->filter->category,
-                fn(Builder $query) => $query
-                    ->whereHas('category', fn(Builder $query) => $query->where('name', $this->filter->category))
+                fn (Builder $query) => $query
+                    ->whereHas('category', fn (Builder $query) => $query->where('name', $this->filter->category))
             )
             ->orderByDesc('id')
             ->paginate();

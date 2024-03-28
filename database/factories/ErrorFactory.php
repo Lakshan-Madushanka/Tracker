@@ -6,10 +6,10 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Carbon\Exceptions\BadFluentConstructorException;
+use Exception;
 use http\Exception\BadConversionException;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\UniqueConstraintViolationException;
-use Exception;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Error>
@@ -48,7 +48,7 @@ class ErrorFactory extends Factory
         }
 
         try {
-            match($errorNo) {
+            match ($errorNo) {
                 1 => $this->error1(),
                 2 => $this->error2(),
                 3 => $this->error3(),
@@ -69,7 +69,6 @@ class ErrorFactory extends Factory
     private function error2(): void
     {
         throw app(BadFluentConstructorException::class);
-
     }
 
     private function error3(): void

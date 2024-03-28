@@ -21,8 +21,6 @@ class EditError extends Component
 
     /**
      * @param  Collection<int, Category>  $categories
-     * @param  Error  $error
-     * @return void
      */
     public function mount(Collection $categories, Error $error): void
     {
@@ -32,7 +30,7 @@ class EditError extends Component
 
     public function save(UpdateErrorAction $editErrorAction): void
     {
-        if($this->form->edit($editErrorAction)) {
+        if ($this->form->edit($editErrorAction)) {
             $this->dispatch('error-edited');
         }
     }

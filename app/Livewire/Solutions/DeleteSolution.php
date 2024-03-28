@@ -18,9 +18,9 @@ class DeleteSolution extends Component
 
         $this->dispatch('solution-deleted');
     }
+
     public function render(): View|Factory|Application
     {
         return view('livewire.solutions.delete-solution');
     }
-
 }

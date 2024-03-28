@@ -14,6 +14,7 @@ class UpsertSolutionAction
             $rank = $error->solutions()->orderByDesc('rank')->first(['rank'])?->rank;
             $rank = is_null($rank) ? 1 : $rank + 1;
         }
+
         return $rank;
     }
 }

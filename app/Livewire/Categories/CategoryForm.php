@@ -13,6 +13,7 @@ use Livewire\Form;
 class CategoryForm extends Form
 {
     public Category $category;
+
     public string $categoryId;
 
     #[Validate(['string', 'required', 'unique:categories'])]
@@ -42,5 +43,4 @@ class CategoryForm extends Form
 
         $updateCategoryAction->execute($this->category, $this->only('name'));
     }
-
 }

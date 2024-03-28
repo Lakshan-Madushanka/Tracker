@@ -119,7 +119,6 @@ it('can filter errors by category name', function (): void {
     $category1->errors()->save($error1);
     $category2->errors()->save($error2);
 
-
     $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1'));
 
     $errors = $vm->errors();
@@ -144,7 +143,6 @@ it('can filter errors by category name and error name', function (): void {
     $category1->errors()->save($error1);
     $category2->errors()->save($error2);
 
-
     $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1', name: '1'));
 
     $errors = $vm->errors();
@@ -167,7 +165,6 @@ it('can filter errors by category name and project name', function (): void {
 
     $category1->errors()->save($error1);
     $category2->errors()->save($error2);
-
 
     $vm = new GetErrorsViewModel(new ErrorFilter(category: 'category1', name: '1'));
 

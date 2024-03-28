@@ -26,9 +26,8 @@ class Solution extends Model
 
     public function text(): Attribute
     {
-        return Attribute::get(fn($value) => Purify::clean($value));
+        return Attribute::get(fn ($value) => Purify::clean($value));
     }
-
 
     // Relationships
     public function error(): BelongsTo

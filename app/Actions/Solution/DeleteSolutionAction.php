@@ -11,6 +11,6 @@ class DeleteSolutionAction extends UpsertSolutionAction
 {
     public function execute(string $solutionId): bool
     {
-        return  Solution::query()->findOrFail($solutionId)->delete();
+        return Solution::query()->findOrFail($solutionId)->delete();
     }
 }
