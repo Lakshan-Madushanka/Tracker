@@ -12,7 +12,7 @@ it('has columns', function ($name): void {
         ->{$name}->toBe($solution->{$name});
 })->with([
     'rank',
-    'text'
+    'text',
 ]);
 
 it('has fillable columns', function ($name): void {

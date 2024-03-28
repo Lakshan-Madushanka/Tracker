@@ -16,7 +16,9 @@ use Spatie\ViewModels\ViewModel;
 
 class GetErrorsViewModel extends ViewModel
 {
-    public function __construct(private readonly ErrorFilter $filter = new ErrorFilter()) {}
+    public function __construct(private readonly ErrorFilter $filter = new ErrorFilter())
+    {
+    }
 
     /**
      * @return LengthAwarePaginator<Model>
@@ -26,23 +28,23 @@ class GetErrorsViewModel extends ViewModel
         return Error::query()
             ->with([
                 'category',
-                'solutions' => fn(HasMany $query) => $query
+                'solutions' => fn (HasMany $query) => $query
                     ->orderBy('rank')
-                    ->orderByDesc('updated_at')
+                    ->orderByDesc('updated_at'),
             ])
             ->when(
                 $this->filter->name,
-                fn(Builder $query) => $query
+                fn (Builder $query) => $query
                     ->where(
-                        fn(Builder $query) => $query
+                        fn (Builder $query) => $query
                             ->where('name', 'like', "%{$this->filter->name}%")
                             ->orWhere('project_name', 'like', "%{$this->filter->name}%")
                     )
             )
             ->when(
                 $this->filter->category,
-                fn(Builder $query) => $query
-                    ->whereHas('category', fn(Builder $query) => $query->where('name', $this->filter->category))
+                fn (Builder $query) => $query
+                    ->whereHas('category', fn (Builder $query) => $query->where('name', $this->filter->category))
             )
             ->latest()
             ->paginate();
@@ -55,5 +57,4 @@ class GetErrorsViewModel extends ViewModel
     {
         return Category::all(['name', 'id']);
     }
-
 }

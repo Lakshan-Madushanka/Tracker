@@ -15,6 +15,7 @@ use Livewire\Form;
 class ErrorForm extends Form
 {
     public Error $error;
+
     public string $errorId;
 
     public $categories;

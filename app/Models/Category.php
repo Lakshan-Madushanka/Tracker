@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $name
+ *
  * @method \string getKey()
  */
 class Category extends Model

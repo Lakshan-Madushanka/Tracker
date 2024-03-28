@@ -15,7 +15,6 @@ it('renders successfully', function (): void {
         ->assertStatus(200);
 });
 
-
 it('receives paginated data', function (): void {
     Error::factory()
         ->count(20)

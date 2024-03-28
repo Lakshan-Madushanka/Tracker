@@ -36,16 +36,15 @@ class Error extends Model
         'project_name',
         'project_url',
         'stack_trace',
-        'category_id'
+        'category_id',
     ];
 
     // Accessors
 
     public function description(): Attribute
     {
-        return Attribute::get(fn($value) => Purify::clean($value));
+        return Attribute::get(fn ($value) => Purify::clean($value));
     }
-
 
     // Relationships
 

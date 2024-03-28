@@ -21,7 +21,6 @@ class CreateError extends Component
 
     /**
      * @param  Collection<int, Category>  $categories
-     * @return void
      */
     public function mount(Collection $categories): void
     {

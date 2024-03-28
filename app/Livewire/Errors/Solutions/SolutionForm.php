@@ -50,5 +50,4 @@ class SolutionForm extends Form
 
         return $updateSolutionAction->execute($this->error, $this->solution, $this->only(['text', 'rank']));
     }
-
 }
