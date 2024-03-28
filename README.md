@@ -10,10 +10,11 @@ applied. Tracker is to solve that issue, with this will never forget the lesson 
 In addition to that this provides link management feature, so you never forget links to important resources.
 
 **Note**
-> Here **error** means a general term. It can be anything you need to keep remember
+> Here **error** means a general term. It can be anything you need to keep remember.
 
 ## Resources
-- [How it works (video)](https://youtu.be/nuircvl2z4g)
+### How it works
+[![Video](https://github.com/Lakshan-Madushanka/Tracker/assets/47297673/f00aafb4-c565-457a-87d4-f16d70f07bab)](https://youtu.be/nuircvl2z4g)
 
 ## Requirements
 - PHP >= 8.1
@@ -66,3 +67,5 @@ We welcome all quality pull requests. While it's not mandatory, we highly encour
 ## License
 This is an open-source project licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
+## Support
+If this product is of any use to you, please consider starring 🌟 the repository. Your support would be greatly appreciated and will help us evaluate how our future products should be.
