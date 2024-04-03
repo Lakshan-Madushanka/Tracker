@@ -46,8 +46,8 @@ Consult the [documentation](https://laravel.com/docs/11.x/sail)
 - Link management
 - Responsive design (Ready to use in any device)
 
-### Backup data
-Spatie backup package is used. Ypu can run below command. For more information
+## Backup data
+Spatie backup package is used. You can run below command. For more information
 consult their [documentation](https://spatie.be/docs/laravel-backup/v8/introduction)
 
 `php artisan backup:run`
