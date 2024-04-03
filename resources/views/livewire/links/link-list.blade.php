@@ -5,12 +5,12 @@
     <livewire:links.create-link :$categories @link-created="$refresh"/>
     <livewire:links.delete-link @link-deleted="$refresh"/>
 
-    <header class="flex justify-between p-2">
+    <header class="flex items-center justify-between p-2">
         <h1 class="m-0">Links</h1>
         <button @click="$dispatch('create-link', {type:'create'})" class="btn btn-primary">Create</button>
     </header>
 
-    <div class="flex flex-col p-2 sm:flex-row mt-4 w-full gap-y-2 gap-x-8">
+    <div class="flex flex-col px-2 sm:flex-row mt-4 w-full gap-y-2 gap-x-8">
         <x-inputs.search class="sm:w-[80%]" inputAttr="wire:model.live=search"/>
         <select wire:model.live="category" class="select select-bordered grow sm:max-w-xs">
             <option value="" selected>All</option>
@@ -20,12 +20,12 @@
         </select>
     </div>
 
-    <div class="flex justify-center h-4 mt-4">
+    <div class="flex justify-center items-center h-10">
         <span class="loading loading-bars loading-md" wire:loading/>
     </div>
 
     <div class="overflow-x-auto text-nowrap">
-        <table class="table border-t">
+        <table class="not-prose table border-t">
             <!-- head -->
             <thead>
             <tr>
