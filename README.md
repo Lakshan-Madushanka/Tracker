@@ -44,6 +44,7 @@ Consult the [documentation](https://laravel.com/docs/11.x/sail)
   - delete
 - Syntax highlighting
 - Link management
+- Responsive design (Ready to use in any device)
 
 ### Backup data
 Spatie backup package is used. Ypu can run below command. For more information
