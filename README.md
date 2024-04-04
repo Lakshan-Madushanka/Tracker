@@ -9,7 +9,7 @@ confront the same error that you solved previously but forgotten the solution th
 applied. Tracker is to solve that issue, with this will never forget the lesson you have learned.
 In addition to that this provides link management feature, so you never forget links to important resources.
 
-**Note**
+> [!Note]
 > Here **error** means a general term. It can be anything you need to keep remember.
 
 ## Resources
