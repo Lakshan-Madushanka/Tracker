@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/abbasudo/laravel-purity/assets/47297673/20b5e0c5-3636-4c45-a5d5-c7dc8ff14c3f" width="800"/>
+    <img src="https://github.com/Lakshan-Madushanka/Tracker/assets/47297673/be565eef-29ea-4661-9d75-2d3bbf728911" width="800"/>
 </p>
 
 # Tracker
