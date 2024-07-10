@@ -16,9 +16,7 @@ use Spatie\ViewModels\ViewModel;
 
 class GetErrorsViewModel extends ViewModel
 {
-    public function __construct(private readonly ErrorFilter $filter = new ErrorFilter())
-    {
-    }
+    public function __construct(private readonly ErrorFilter $filter = new ErrorFilter()) {}
 
     /**
      * @return LengthAwarePaginator<Model>

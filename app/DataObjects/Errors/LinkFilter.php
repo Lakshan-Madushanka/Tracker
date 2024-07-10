@@ -11,8 +11,7 @@ class LinkFilter implements Arrayable
     public function __construct(
         public readonly string $search = '',
         public readonly string $category = '',
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {
