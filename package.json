@@ -17,6 +17,6 @@
     },
     "dependencies": {
         "highlight.js": "^11.9.0",
-        "trix": "^2.0.10"
+        "trix": "^2.1.1"
     }
 }
