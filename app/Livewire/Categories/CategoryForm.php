@@ -33,6 +33,7 @@ class CategoryForm extends Form
 
         $createCategoryAction->execute($this->only('name'));
 
+        $this->resetValidation();
         $this->reset('name');
 
     }
@@ -42,5 +43,7 @@ class CategoryForm extends Form
         $this->validate();
 
         $updateCategoryAction->execute($this->category, $this->only('name'));
+
+        $this->resetValidation();
     }
 }

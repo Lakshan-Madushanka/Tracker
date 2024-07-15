@@ -12,11 +12,11 @@ use Livewire\Form;
 
 class LinkForm extends Form
 {
-    public string $category_id;
+    public string $category_id = '';
 
-    public string $url;
+    public string $url = '';
 
-    public string $description;
+    public string $description = '';
 
     public $categories;
 
@@ -52,6 +52,9 @@ class LinkForm extends Form
         $this->validate();
 
         $createLinkAction->execute($this->getData());
+
+        $this->resetValidation();
+        $this->reset('category_id', 'url', 'description');
     }
 
     public function update(UpdateLinkAction $updateLinkAction): bool

@@ -31,14 +31,14 @@
 
                 <div class="flex flex-col">
                     <label for="link_url">URL</label>
-                    <textarea
+                    <input
                         wire:model="form.url"
                         id="link_url"
-                        class="textarea textarea-bordered"
+                        class="input input-bordered"
                         type="url"
                         placeholder="url"
                     >
-                    </textarea>
+                    </input>
                     @error('form.url')
                     <div class="text-red-500">{{$message}}</div>
                     @enderror

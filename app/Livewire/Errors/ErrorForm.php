@@ -63,13 +63,22 @@ class ErrorForm extends Form
     {
         $this->validate();
 
-        return $createErrorAction->execute($this->except('categories', 'errorId', 'error'));
+        $error =  $createErrorAction->execute($this->except('categories', 'errorId', 'error'));
+
+        $this->resetValidation();
+        $this->reset('category_id', 'name', 'description', 'project_name', 'project_url', 'stack_trace');
+
+        return $error;
     }
 
     public function edit(UpdateErrorAction $editErrorAction): bool
     {
         $this->validate();
 
-        return $editErrorAction->execute($this->error, $this->except('categories', 'errorId', 'error'));
+        $error =  $editErrorAction->execute($this->error, $this->except('categories', 'errorId', 'error'));
+
+        $this->resetValidation();
+
+        return $error;
     }
 }

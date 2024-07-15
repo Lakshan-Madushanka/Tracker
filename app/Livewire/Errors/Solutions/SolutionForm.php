@@ -41,6 +41,7 @@ class SolutionForm extends Form
 
         $createSolutionAction->execute($this->error, $this->except('error', 'solution'));
 
+        $this->resetValidation();
         $this->reset(['text', 'rank']);
     }
 
@@ -48,6 +49,10 @@ class SolutionForm extends Form
     {
         $this->validate();
 
-        return $updateSolutionAction->execute($this->error, $this->solution, $this->only(['text', 'rank']));
+        $updated =  $updateSolutionAction->execute($this->error, $this->solution, $this->only(['text', 'rank']));
+
+        $this->resetValidation();
+
+        return $updated;
     }
 }
