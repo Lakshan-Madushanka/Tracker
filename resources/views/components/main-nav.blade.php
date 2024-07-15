@@ -12,14 +12,6 @@
                 Home
             </a>
         </li>
-        <li x-data>
-            <span
-                class="link link-secondary"
-                @click="$dispatch('create-error')"
-            >
-                Create Error
-            </span>
-        </li>
         <li>
             <a
                 @class([
@@ -63,12 +55,6 @@
                 >
                     Home
                 </a>
-                <span
-                    class="link link-secondary"
-                    @click="$dispatch('create-error')"
-                >
-                Create Error
-                </span>
                 <a
                     @class([
                         "link link-secondary",

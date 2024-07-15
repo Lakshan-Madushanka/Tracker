@@ -28,6 +28,10 @@
         <span class="loading loading-bars loading-lg" wire:loading/>
     </div>
 
+    <div @click="$dispatch('create-error')" class="flex justify-end">
+        <button class="btn btn-primary">Create Error</button>
+    </div>
+
     <ul class="list-none mt-0 pl-0">
         @forelse($errors as $error)
             <livewire:errors.edit-error wire:key="edit-error-{{$error->getKey()}}" :$categories :$error/>
