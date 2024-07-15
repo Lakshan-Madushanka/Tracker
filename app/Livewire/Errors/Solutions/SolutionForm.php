@@ -49,7 +49,7 @@ class SolutionForm extends Form
     {
         $this->validate();
 
-        $updated =  $updateSolutionAction->execute($this->error, $this->solution, $this->only(['text', 'rank']));
+        $updated = $updateSolutionAction->execute($this->error, $this->solution, $this->only(['text', 'rank']));
 
         $this->resetValidation();
 
